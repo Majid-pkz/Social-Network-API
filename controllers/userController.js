@@ -11,7 +11,7 @@ module.exports = {
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
-      .populate('thought')      
+      .populate('thoughts')      
       .populate('friends')  //?????????????
       .then((user) =>
         !user
@@ -34,7 +34,7 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
-          : res.json({ message: 'User and associated apps deleted!' })
+          : res.json({ message: 'User and associated thoughts updated!' })
       )
      
       .catch((err) => res.status(500).json(err));
@@ -46,7 +46,7 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
-          : res.json({ message: 'User and associated apps deleted!' })
+          : res.json({ message: 'User  deleted!' })
       )
      
       .catch((err) => res.status(500).json(err));
