@@ -71,8 +71,9 @@ module.exports = {
        
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId }, 
+            { $push: { reactions: req.body } },
            
-            {  reactions: req.body.reaction },
+            // {  reactions: req.body.reaction },
             { new: true }
             )
         .then((thoughtsData) =>   {
