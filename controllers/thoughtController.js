@@ -12,7 +12,7 @@ module.exports = {
 
 //   GET to get a single thought by its _id
     getSingleThought(req, res) {
-        Thought.findOne({ _id: req.params.toughtId })
+        Thought.findOne({ _id: req.params.thoughtId })
         // .select('-__v')       
         .then((thoughtsData) =>
             !thoughtsData
@@ -63,6 +63,30 @@ module.exports = {
         
         .catch((err) => res.status(500).json(err));
     },
+
+
+    //   /api/thoughts/thoughtId/reactions
+    // POST to create a reaction stored in a single thought's reactions array field
+    createReaction(req,res){       
+       
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId }, 
+           
+            {  reactions: req.body.reaction },
+            { new: true }
+            )
+        .then((thoughtsData) =>   {
+            if(!thoughtsData){
+               return res.status(404).json({ message: 'no thought with this Id ' })
+            }
+            res.json(thoughtsData)
+        } )
+    .catch((err) => console.log(err))
+    // res.status(500).json(err));
+    },
+
+
+    
 
 
 
