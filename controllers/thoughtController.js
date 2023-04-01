@@ -4,7 +4,7 @@ module.exports = {
 
      // Get all thoughts
   getThoughts(req, res) {
-    Thought.find()
+    Thought.find().select("-id")
       .then((thoughtsData) => res.json(thoughtsData))
       .catch((err) => console.log(err))
     //   res.status(500).json(err));
@@ -13,7 +13,7 @@ module.exports = {
 //   GET to get a single thought by its _id
     getSingleThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
-        // .select('-__v')       
+        //  .select('-__v')       
         .then((thoughtsData) =>
             !thoughtsData
             ? res.status(404).json({ message: 'No thought with that ID' })
@@ -45,6 +45,7 @@ module.exports = {
 //PUT to update a thought by its _id
     updateThought(req, res) {
         Thought.findOneAndUpdate({ _id: req.params.thoughtId }, {$set:req.body})
+        // .select('-__v')  
         .then((thoughtsData) =>       
         !thoughtsData
         ? res.status(404).json({ message: 'no thought with this Id ' })
@@ -71,11 +72,14 @@ module.exports = {
        
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId }, 
-            { $push: { reactions: req.body } },
+            // { $push: { reactions: req.body } },
+            { $addToSet: { reactions: req.body } },
+          
            
             // {  reactions: req.body.reaction },
             { new: true }
             )
+
         .then((thoughtsData) =>   {
             if(!thoughtsData){
                return res.status(404).json({ message: 'no thought with this Id ' })
