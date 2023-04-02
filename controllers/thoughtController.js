@@ -105,8 +105,12 @@ module.exports = {
         }
         res.json(thoughtsData)
     } )
-.catch((err) =>  res.status(500).json(err));
-// console.log(err))
+    .catch((err) => {
+        res.status(500).json(err);
+        console.log(err)
+    }) 
+
+
 },
 
 
