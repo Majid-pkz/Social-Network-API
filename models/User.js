@@ -19,9 +19,9 @@ const userSchema = new Schema(
         match: /^\S+@\S+\.\S+$/,
       },
      
-      thoughts: [[{ type: Schema.Types.ObjectId, ref: 'thought' }]],
-     // self-reference??????
-      friends: [[{ type: Schema.Types.ObjectId, ref: 'user' }]],
+      thoughts: [{ type: Schema.Types.ObjectId, ref: 'thought' }],
+     // self-reference
+      friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
     },
     {
       toJSON: {
