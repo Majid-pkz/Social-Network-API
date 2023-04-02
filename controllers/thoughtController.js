@@ -72,11 +72,9 @@ module.exports = {
        
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId }, 
-            // { $push: { reactions: req.body } },
-            { $addToSet: { reactions: req.body } },
-          
+            //  { $push: { reactions: req.body } },
+             { $addToSet: { reactions: req.body } },          
            
-            // {  reactions: req.body.reaction },
             { new: true }
             )
             
@@ -86,8 +84,10 @@ module.exports = {
             }
             res.json(thoughtsData)
         } )
-    .catch((err) => console.log(err))
-    // res.status(500).json(err));
+    .catch((err) => {
+        console.log(err)
+        res.status(500).json(err)
+    })
     },
 
 
