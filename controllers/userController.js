@@ -51,14 +51,36 @@ module.exports = {
      
       .catch((err) => res.status(500).json(err));
   },
+  createFriend(req,res){       
+       
+    User.findOneAndUpdate(
+        { _id: req.params.userId }, 
+        // { $push: { friends: req.body } },
+        { $addToSet: { friends: req.params.friendId} },     
+       
+       
+        { new: true }
+        )
+        
+    .then((friendsData) =>   {
+        if(!friendsData){
+           return res.status(404).json({ message: 'no friend with this Id ' })
+        }
+        res.json(friendsData)
+    } )
+.catch((err) => {
+  res.status(500).json(err);
+  console.log(err)
+})
 
+},
+
+
+  
 //-------------------------------------------------------------
 //   BONUS: Remove a user's associated thoughts when deleted.
-
-// /api/users/:userId/friends/:friendId
-
-
-// POST to add a new friend to a user's friend list
+//------------------------------------------------------------
+// /api/users/:userId/friends/:friendId // POST to add a new friend to a user's friend list
 
 
 // DELETE to remove a friend from a user's friend lis
