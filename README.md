@@ -35,6 +35,16 @@ Majid
 ## Demo
 
 <p >
-    <img src="./Assets/">
+    <img src="./Assets/all-users.png">
 </p>
-https://drive.google.com/file/d/1JBxFrv2O4ps9kqcERK1x4vX9EWGJFC9K/view
+
+<p >
+    <img src="./Assets/all-thoughts.png">
+</p>
+
+## Link to watch the walkthrough video
+<p >
+    https://drive.google.com/file/d/1JBxFrv2O4ps9kqcERK1x4vX9EWGJFC9K/view
+</p>
+
+
