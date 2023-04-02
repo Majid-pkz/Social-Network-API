@@ -76,6 +76,8 @@ module.exports = {
 },
 
 
+
+
   
 //-------------------------------------------------------------
 //   BONUS: Remove a user's associated thoughts when deleted.
@@ -84,7 +86,25 @@ module.exports = {
 
 
 // DELETE to remove a friend from a user's friend lis
-//-----------------------------------------------------------
+//----------------------------------------------------------
+    deleteFriend(req,res){ 
+      User.findOneAndUpdate(
+          { _id: req.params.friendId }, 
+          { $pull: { friends:{_id: req.params.friendId } }},       
+          { new: true }
+          )
+          
+      .then((friendsData) =>   {
+          if(!friendsData){
+            return res.status(404).json({ message: 'no friend with this Id ' })
+          }
+          res.json(friendsData)
+      } )
+    .catch((err) =>  {
+      res.status(500).json(err);
+    console.log(err)
+    })
+    },
 
 };
 
